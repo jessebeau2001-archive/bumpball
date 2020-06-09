@@ -41,7 +41,7 @@ namespace GXPEngine
 
 			//_velocity += _force; //Not used because balls are not accelerating
 			//_force *= .98f;
-			_position += _velocity * _speed;
+			_position += _velocity * Time.deltaTime;
 			//_velocity *= 0;
 			
 			x = _position.x;
@@ -62,29 +62,16 @@ namespace GXPEngine
 
 			if (other is Brick)
 			{
-				Brick brick = (other as Brick);
-
-				Vec2 testPos = _position;
-
-				if (_position.x < brick.x)
-					testPos.x = brick.x;
-				else if (_position.x > brick.x + brick.width)
-					testPos.x = brick.x + brick.width;
-
-				if (_position.y < brick.y)
-					testPos.y = brick.y;
-				else if (_position.y > brick.y)
-					testPos.y = brick.y + brick.height;
-
-				Vec2 dist = _position - testPos;
-
-				float distance = Mathf.Sqrt(Mathf.Pow(dist.x, 2) + Mathf.Pow(dist.y, 2));
-
-				if (distance <= _radius)
-				{
 					_velocity.Reflect(new Vec2(colInfo.normal), 1);
 					(other as Brick).GetHit();
-				}
+			}
+
+			if (other is Triangle)
+			{
+				Triangle col = (other as Triangle);
+
+				
+				_velocity.Reflect(col.normal, 1);
 			}
 		}
 

@@ -9,6 +9,9 @@ public class MyGame : Game
 	{
 		level = new Level();
 		AddChild(level);
+
+		UnitTest test = new UnitTest();
+		AddChild(test);
 	}
 
 	static void Main()

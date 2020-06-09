@@ -79,6 +79,8 @@
     <Compile Include="MyGame.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="AdvancedLine.cs" />
+    <Compile Include="Triangle.cs" />
+    <Compile Include="UnitTest.cs" />
     <Compile Include="Vec2.cs" />
   </ItemGroup>
   <ItemGroup />

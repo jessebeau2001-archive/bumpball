@@ -11,8 +11,8 @@ namespace GXPEngine
 		List<Brick> bricks = new List<Brick>();
 		AdvancedLine ray;
 
-		Brick angled = new Brick(1000, 900, 100, 100);
-
+		//Brick angled = new Brick(1000, 900, 100, 100);
+		Triangle tria;
 
 		//MovingBox box = new MovingBox(new Vec2(0, 0), new Vec2(200, 200));
 		
@@ -27,8 +27,11 @@ namespace GXPEngine
 			for (int i = 0; i < 8; i++) //spawns all rows of bricks
 				PopBricks(100, game.width - 100, 100 + (100 * i), 90);
 
-			angled.rotation = 45;
+			//angled.rotation = 45;
 			//AddChild(angled);
+
+			//tria = new Triangle(game.width / 2, game.height / 2, 200, 100);
+			//AddChild(tria);
 		}
 
 		void Update()
@@ -38,7 +41,7 @@ namespace GXPEngine
 
 			if (Input.GetMouseButtonDown(0))
 			{
-				ballList.Add(new Projectile(20, barrel, 20));
+				ballList.Add(new Projectile(10, barrel, 20));
 				AddChild(ballList[ballList.Count - 1]);
 				Console.WriteLine(ballList.Count);
 			}
@@ -51,21 +54,19 @@ namespace GXPEngine
 
 			while (bricks[bricks.Count - 1].x + bricks[bricks.Count - 1].width < endX)
 			{
+				int interval = 10;
+
 				Brick lastBrick = bricks[bricks.Count - 1];
-				if (lastBrick.x + lastBrick.width + 10 + 200 >= endX)
+				if (lastBrick.x + lastBrick.width + interval + 200 >= endX)
 				{
-					bricks.Add(new Brick(lastBrick.x + lastBrick.width + 10, y, endX - (lastBrick.x + lastBrick.width + 10), height));
+					bricks.Add(new Brick(lastBrick.x + lastBrick.width + interval, y, endX - (lastBrick.x + lastBrick.width + interval), height));
 					AddChild(bricks[bricks.Count - 1]);
-					Console.WriteLine("Put down LAST brick");
+					//Console.WriteLine("Put down LAST brick");
 					return;
 				}
-				if (Utils.Random(1, 10) == 8)
-				{
-				} else {
-					bricks.Add(new Brick(lastBrick.x + lastBrick.width + 10, y, Utils.Random(50, 200), height));
-					AddChild(bricks[bricks.Count - 1]);
-					Console.WriteLine("Put down brick");
-				}
+				bricks.Add(new Brick(lastBrick.x + lastBrick.width + interval, y, Utils.Random(50, 200), height));
+				AddChild(bricks[bricks.Count - 1]);
+				//Console.WriteLine("Put down brick");
 			}
 		}
 	}
